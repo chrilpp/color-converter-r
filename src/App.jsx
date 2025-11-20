@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import dot from '/dot3.png'
 import './App.css'
 
 function App() {
@@ -13,51 +12,47 @@ function App() {
   const addItem = () => {
     const trimmed = inputValue.trim()
     if (!trimmed) return
-    setItems((prev) => [...prev, trimmed])
+    setItems(prev => [...prev, trimmed])
     setInputValue('')
   }
 
-  const onKeyDown = (e) => {
+  const onKeyDown = e => {
     if (e.key === 'Enter') addItem()
   }
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank" rel="noopener noreferrer">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
+      <header className='absolute inset-x-0 top-0 z-50'></header>
+      <nav className='h-16 flex items-center justify-center mb-4'>
+        {' '}
+        {/* fixed nav height */}
+        <a href='index' className='mx-4'>
+          Index
         </a>
-        <a href="https://react.dev" target="_blank" rel="noopener noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
+        <a href='about' className='mx-4'>
+          About
         </a>
+        <a href='media' className='mx-4'>
+          Media
+        </a>
+      </nav>
+
+      {/* parent = 50% of viewport height minus nav (nav = h-16 = 4rem) */}
+      <div className='center-container bg-red-500/30 h-[calc(80vh-4rem)] w-[calc(80vh-4rem)]'>
+        {/* child = 50% of parent */}
+        <div className='flex w-full h-1/2 bg-green-500/30'>
+          <a href='https://google.com' target='_blank' rel='noreferrer' className='flex-1 h-full flex items-center justify-center'>
+            <img src={dot} alt='dot' className='h-2/4' />
+          </a>
+
+          <a href='https://google.com' target='_blank' rel='noreferrer' className='flex-1 h-full flex items-center justify-center'>
+            <img src={dot} alt='dot2' className='h-2/4' />
+          </a>
+        </div>
+        <div className='flex w-fill h-1/2 bg-blue-500/30 items-center justify-center'>
+          <h1>Some text</h1>
+        </div>
       </div>
-      <h1>Counter 2k</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        The best site ever existed! (for learning lals)
-      </p>
-      <div style={{ margin: '2rem 0' }}>
-        <input
-          type="text"
-          placeholder="Type something..."
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-          onKeyDown={onKeyDown}
-        />
-        <button onClick={addItem}>Add item</button>
-      </div>
-      <ul id="item-list">
-        {items.map((item, index) => (
-          <li key={index}>{item}</li>
-        ))}
-      </ul>
     </>
   )
 }
